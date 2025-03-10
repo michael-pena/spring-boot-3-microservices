@@ -19,7 +19,6 @@ import lombok.ToString;
 @AllArgsConstructor
 public class Accounts extends BaseEntity {
 
-    
     @Column(name="customer_id", nullable = false, unique = true)
     private Long customerId;
 
@@ -32,5 +31,5 @@ public class Accounts extends BaseEntity {
     private String accountType;
 
     @Column(name="branch_address")
-    private String branchAddress;
+    private Long balance;
 }

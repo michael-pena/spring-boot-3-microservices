@@ -44,7 +44,7 @@ public class AccountController {
         AccountResponseDTO responseDTO = accountService.createNewAccount(createDTO);
         return ResponseEntity
                 .created(UriComponentsBuilder
-                    .fromPath(ACCOUNT_PATH)
+                    .fromPath(ACCOUNT_PATH_ID)
                     .build(responseDTO.getAccountNumber()))
                 .body(responseDTO);
     }

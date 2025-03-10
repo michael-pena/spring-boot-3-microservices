@@ -40,8 +40,7 @@ public class AccountService implements AccountOperations{
             return new ArrayList<AccountResponseDTO>();
         }
         
-        return accountRepository.findAll()
-            .stream()
+        return accountsResults.stream()
             .map(accountMapper::toDTO)
             .toList();
     }

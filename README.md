@@ -40,9 +40,21 @@ Demonstration of microservices concepts using Java and Spring boot 3, Docker, an
     ```
 
 <!-- TODO -->
-2. Start the Spring Boot application:
+2. Build Jars for each service:
 
     ```bash
+    cd spring-boot-3-microservices/accounts-ms/
+    ./mvnw clean compile install
+
+    cd ../customer-ms/
+    ./mvnw clean compile install
+    ```
+
+3. Run with Docker Compose:
+
+    ```bash
+    cd ..
+    docker-compose up --build
     ```
 
 

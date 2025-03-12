@@ -23,7 +23,7 @@ Bank account example - associated with a customer - customerId.
     ```bash
     cd spring-boot-3-microservices/accounts-ms/
     ./mvnw clean compile install
-    docker build .
+    docker build . -t accounts
     ```
 
 <!-- TODO -->

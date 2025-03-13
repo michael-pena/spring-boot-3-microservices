@@ -15,6 +15,8 @@ import com.mpena.accounts_ms.account.dto.AccountResponseDTO;
 import com.mpena.accounts_ms.account.service.AccountService;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequiredArgsConstructor
@@ -24,6 +26,7 @@ public class AccountController {
     public final static String ACCOUNT_PATH_ID = ACCOUNT_PATH + "{accountId}/";
 
     public final AccountService accountService;
+    public final ContactInfoDTO contactInfoDTO;
 
     @GetMapping(ACCOUNT_PATH_ID)
     public ResponseEntity<AccountResponseDTO> getAccount(@PathVariable("accountId") Long accountId) {
@@ -48,6 +51,12 @@ public class AccountController {
                     .build(responseDTO.getAccountNumber()))
                 .body(responseDTO);
     }
+
+    @GetMapping(ACCOUNT_PATH + "contactinfo/")
+    public ResponseEntity<ContactInfoDTO> getMethodName(@RequestParam String param) {
+        return ResponseEntity.ok().body(contactInfoDTO);
+    }
+    
     
     
 }

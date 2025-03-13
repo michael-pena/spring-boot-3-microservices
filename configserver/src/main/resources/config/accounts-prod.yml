@@ -1,0 +1,11 @@
+build:
+  version: "3.0"
+
+accounts:
+  message: "Banking accounts REST API - Prod"
+  contactDetails:
+    name: "Michael Pena - Developer"
+    email: "test@gmail.com"
+  onCallSupport:
+    - 214-000-0000
+    - 817-000-0000

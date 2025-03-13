@@ -18,7 +18,6 @@ Customer MS - names, address, account number - associated in accounts microservi
     ```bash
     cd spring-boot-3-microservices/customer-ms/
     ./mvnw clean compile install
-    docker build . -t customer
     ```
 
 <!-- TODO -->

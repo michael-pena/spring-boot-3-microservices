@@ -1,0 +1,10 @@
+build:
+  version: "3.0"
+
+accounts:
+  message: "Banking accounts REST API - Dev"
+  contactDetails:
+    name: "Michael Pena - Developer"
+    email: "test@gmail.com"
+  onCallSupport:
+    - "No on call for dev - email/dm team"

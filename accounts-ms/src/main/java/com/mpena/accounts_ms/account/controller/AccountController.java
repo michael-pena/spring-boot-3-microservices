@@ -53,7 +53,7 @@ public class AccountController {
     }
 
     @GetMapping(ACCOUNT_PATH + "contactinfo/")
-    public ResponseEntity<ContactInfoDTO> getMethodName(@RequestParam String param) {
+    public ResponseEntity<ContactInfoDTO> getMethodName() {
         return ResponseEntity.ok().body(contactInfoDTO);
     }
     

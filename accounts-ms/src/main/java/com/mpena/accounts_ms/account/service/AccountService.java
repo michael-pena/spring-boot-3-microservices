@@ -33,6 +33,12 @@ public class AccountService implements AccountOperations{
     }
 
     @Override
+    public AccountResponseDTO getAccountByCustomerId(Long customerId) {        
+        return accountMapper.toDTO(accountRepository.findById(customerId)
+        .orElseThrow(() -> new RuntimeException("Account with id: " + customerId + "not found.")));
+    }
+
+    @Override
     public List<AccountResponseDTO> getAllAccounts() {
         List<Accounts> accountsResults = accountRepository.findAll();
 
@@ -45,5 +51,4 @@ public class AccountService implements AccountOperations{
             .toList();
     }
 
-    
 }

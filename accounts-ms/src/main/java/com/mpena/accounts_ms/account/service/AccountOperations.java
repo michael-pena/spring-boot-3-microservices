@@ -12,4 +12,6 @@ public interface AccountOperations {
     public List<AccountResponseDTO> getAllAccounts();
 
     public AccountResponseDTO getAccount(Long accountId);
+
+    public AccountResponseDTO getAccountByCustomerId(Long customerId);
 }

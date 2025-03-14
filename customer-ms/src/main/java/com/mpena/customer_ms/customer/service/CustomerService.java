@@ -3,9 +3,12 @@ package com.mpena.customer_ms.customer.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.mpena.customer_ms.customer.dto.AccountDTO;
 import com.mpena.customer_ms.customer.dto.CustomerCreateDTO;
+import com.mpena.customer_ms.customer.dto.CustomerDetailsDTO;
 import com.mpena.customer_ms.customer.dto.CustomerResponseDTO;
 import com.mpena.customer_ms.customer.entity.Customer;
 import com.mpena.customer_ms.customer.mapper.CustomerMapper;
@@ -19,6 +22,8 @@ public class CustomerService implements CustomerOperations{
 
     private final CustomerRepository customerRepository;
     private final CustomerMapper customerMapper;
+    
+    private final AccountsFeignClient accountsFeignClient;
 
     @Override
     public CustomerResponseDTO createNewCustomer(CustomerCreateDTO createDTO) {
@@ -45,5 +50,17 @@ public class CustomerService implements CustomerOperations{
         .orElseThrow(() -> new RuntimeException("Customer with id: " + customerId + "not found.")));
     }
 
-    
+    @Override
+    public CustomerDetailsDTO getCustomerDetails(Long customerId) {
+        
+        CustomerResponseDTO customerResponseDTO = customerMapper.toDTO(customerRepository.findById(customerId)
+            .orElseThrow(() -> new RuntimeException("Customer with id: " + customerId + "not found.")));
+        
+        ResponseEntity<AccountDTO> accountDTO = accountsFeignClient.fetchAccountDetails(customerId);
+        
+        return CustomerDetailsDTO.builder()
+            .customerResponseDTO(customerResponseDTO)
+            .accountDTO(accountDTO.getBody())
+            .build();
+    }
 }

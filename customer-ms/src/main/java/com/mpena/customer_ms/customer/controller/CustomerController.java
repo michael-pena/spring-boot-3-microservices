@@ -11,10 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.mpena.customer_ms.customer.dto.CustomerCreateDTO;
+import com.mpena.customer_ms.customer.dto.CustomerDetailsDTO;
 import com.mpena.customer_ms.customer.dto.CustomerResponseDTO;
 import com.mpena.customer_ms.customer.service.CustomerService;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequiredArgsConstructor
@@ -22,6 +25,7 @@ public class CustomerController {
 
     public final static String CUSTOMER_PATH = "/api/v1/customer/";
     public final static String CUSTOMER_PATH_ID = CUSTOMER_PATH + "{customerId}/";
+    public final static String CUSTOMER_DETAILS = CUSTOMER_PATH + "details/{customerId}/";
 
     private final CustomerService customerService;
 
@@ -48,4 +52,11 @@ public class CustomerController {
                     .build(responseDTO.getId()))
                 .body(responseDTO);
     }
+
+    @GetMapping(CUSTOMER_DETAILS)
+    public ResponseEntity<CustomerDetailsDTO> getCustomerDetails(@PathVariable("customerId") Long customerId) {
+        CustomerDetailsDTO customerDetailsDTO = customerService.getCustomerDetails(customerId);
+        return ResponseEntity.ok().body(customerDetailsDTO);
+    }
+    
 }

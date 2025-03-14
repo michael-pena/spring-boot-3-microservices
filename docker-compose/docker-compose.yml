@@ -64,6 +64,8 @@ services:
     depends_on:
       configserver:
         condition: service_healthy
+      eurekaserver:
+        condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: "accounts"
     extends:
@@ -78,6 +80,8 @@ services:
       - "8081:8081"
     depends_on:
       configserver:
+        condition: service_healthy
+      eurekaserver:
         condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: "customer"

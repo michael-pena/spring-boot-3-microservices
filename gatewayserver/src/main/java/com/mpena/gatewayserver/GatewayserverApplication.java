@@ -18,11 +18,14 @@ public class GatewayserverApplication {
 		return routeLocatorBuilder.routes()
 			.route(p -> p
 				.path("/bank/accounts/**")
-				.filters( f -> f.rewritePath("/bank/accounts/(?<segment>.*)","/${segment}"))
+				.filters( f -> f.rewritePath("/bank/accounts/(?<segment>.*)","/${segment}")
+					.circuitBreaker(config -> config.setName("accountsCircuitBreaker")))
 				.uri("lb://ACCOUNTS"))
 			.route(p -> p
 				.path("/bank/customers/**")
-				.filters( f -> f.rewritePath("/bank/customers/(?<segment>.*)","/${segment}"))
+				.filters( f -> f.rewritePath("/bank/customers/(?<segment>.*)","/${segment}")
+					.circuitBreaker(config -> config.setName("customersCircuitBreaker")
+					.setFallbackUri("forward::/contactSupport")))
 				.uri("lb://CUSTOMERS"))
 			.build();
 	}

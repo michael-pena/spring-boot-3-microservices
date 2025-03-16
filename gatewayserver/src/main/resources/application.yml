@@ -42,6 +42,4 @@ info:
 
 logging:
   level:
-    com:
-      mpena:
-        gatewayserver: DEBUG
+    '[com.mpena.gatewayserver]': DEBUG

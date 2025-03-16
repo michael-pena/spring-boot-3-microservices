@@ -53,3 +53,7 @@ info:
     name: "customer"
     description: "Bank Customer Application"
     version: "1.0.0"
+
+logging:
+  level:
+    '[com.mpena.customer_ms]': DEBUG

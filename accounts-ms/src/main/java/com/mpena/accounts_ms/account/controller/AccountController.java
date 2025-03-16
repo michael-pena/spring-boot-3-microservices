@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -15,8 +16,10 @@ import com.mpena.accounts_ms.account.dto.AccountResponseDTO;
 import com.mpena.accounts_ms.account.service.AccountService;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequiredArgsConstructor
+@Slf4j
 public class AccountController {
 
     public final static String ACCOUNT_PATH = "/api/v1/account/";
@@ -56,7 +59,8 @@ public class AccountController {
     }
 
     @GetMapping(ACCOUNT_PATH_CUSTOMER_ID)
-    public ResponseEntity<AccountResponseDTO> getAccountCustomerId(@PathVariable("customerId") Long customerId) {
+    public ResponseEntity<AccountResponseDTO> getAccountCustomerId(@RequestHeader("bank-correlation-id") String correlationId, @PathVariable("customerId") Long customerId) {
+        log.debug("bank-correlation-id: {}", correlationId);
         AccountResponseDTO accountResponseDTO = accountService.getAccountByCustomerId(customerId);
         return ResponseEntity.ok().body(accountResponseDTO);
     }

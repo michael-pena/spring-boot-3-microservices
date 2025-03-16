@@ -55,3 +55,7 @@ info:
     name: "accounts"
     description: "Bank Accounts Application"
     version: "1.0.0"
+
+logging:
+  level:
+    '[com.mpena.accounts_ms]': DEBUG

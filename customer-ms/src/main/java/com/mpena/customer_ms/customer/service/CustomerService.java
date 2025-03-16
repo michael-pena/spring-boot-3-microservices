@@ -51,12 +51,12 @@ public class CustomerService implements CustomerOperations{
     }
 
     @Override
-    public CustomerDetailsDTO getCustomerDetails(Long customerId) {
+    public CustomerDetailsDTO getCustomerDetails(Long customerId, String correlationId) {
         
         CustomerResponseDTO customerResponseDTO = customerMapper.toDTO(customerRepository.findById(customerId)
             .orElseThrow(() -> new RuntimeException("Customer with id: " + customerId + "not found.")));
         
-        ResponseEntity<AccountDTO> accountDTO = accountsFeignClient.fetchAccountDetails(customerId);
+        ResponseEntity<AccountDTO> accountDTO = accountsFeignClient.fetchAccountDetails(customerId, correlationId);
         
         return CustomerDetailsDTO.builder()
             .customerResponseDTO(customerResponseDTO)

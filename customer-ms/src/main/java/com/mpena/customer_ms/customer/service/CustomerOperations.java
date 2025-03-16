@@ -13,5 +13,5 @@ public interface CustomerOperations {
 
     public CustomerResponseDTO getCustomer(Long customerId);
 
-    public CustomerDetailsDTO getCustomerDetails(Long customerId);
+    public CustomerDetailsDTO getCustomerDetails(Long customerId, String correlationId);
 }

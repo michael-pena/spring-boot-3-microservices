@@ -13,6 +13,7 @@ import com.mpena.customer_ms.customer.dto.CustomerResponseDTO;
 import com.mpena.customer_ms.customer.entity.Customer;
 import com.mpena.customer_ms.customer.mapper.CustomerMapper;
 import com.mpena.customer_ms.customer.repository.CustomerRepository;
+import com.mpena.customer_ms.customer.service.client.AccountsFeignClient;
 
 import lombok.RequiredArgsConstructor;
 

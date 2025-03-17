@@ -1,4 +1,4 @@
-package com.mpena.customer_ms.customer.service;
+package com.mpena.customer_ms.customer.service.client;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
@@ -7,8 +7,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 
 import com.mpena.customer_ms.customer.dto.AccountDTO;
+import com.mpena.customer_ms.customer.service.AccountsFallback;
 
-@FeignClient("accounts")
+@FeignClient(name="accounts", fallback= AccountsFallback.class)
 public interface AccountsFeignClient {
 
     @GetMapping("/api/v1/account/customer/{customerId}/")

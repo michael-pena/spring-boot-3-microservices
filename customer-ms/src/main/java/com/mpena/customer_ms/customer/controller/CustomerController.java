@@ -1,6 +1,7 @@
 package com.mpena.customer_ms.customer.controller;
 
 import java.util.List;
+import java.util.concurrent.TimeoutException;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,11 +17,9 @@ import com.mpena.customer_ms.customer.dto.CustomerDetailsDTO;
 import com.mpena.customer_ms.customer.dto.CustomerResponseDTO;
 import com.mpena.customer_ms.customer.service.CustomerService;
 
+import io.github.resilience4j.retry.annotation.Retry;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
-import org.springframework.web.bind.annotation.RequestParam;
-
 
 @RestController
 @RequiredArgsConstructor
@@ -45,7 +44,19 @@ public class CustomerController {
         List<CustomerResponseDTO> customerList =  customerService.getAllCustomers();
         return ResponseEntity.ok().body(customerList);
     }
+
+    @Retry(name="getFallbackTest", fallbackMethod = "getBuildInfoFallback")
+    @GetMapping(CUSTOMER_PATH + "fallbacktest/")
+    public ResponseEntity<String> getFallbackTest() throws TimeoutException {
+        log.debug("getFallbackTest() method invoked");
+        throw new TimeoutException(); // make the retry method kick in
+        //return ResponseEntity.ok().body("Build: 1.0");
+    }
     
+    public ResponseEntity<String> getBuildInfoFallback(Throwable throwable) {
+        log.debug("getBuildInfoFallback() method invoked");
+        return ResponseEntity.ok().body("Fallback method version: 1.0");
+    }
 
     @PostMapping(CUSTOMER_PATH)
     public ResponseEntity<CustomerResponseDTO> createCustomer(@RequestBody CustomerCreateDTO createDTO) {

@@ -37,6 +37,10 @@ management:
     health:
       probes:
         enabled: true
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
   info:
     env:
       enabled: true
